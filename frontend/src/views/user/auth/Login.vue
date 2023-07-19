@@ -122,7 +122,7 @@ export default {
       firstFocus?.$el.focus()
     }
     if (this.$auth.isLoggedIn()) {
-      this.$router.push({ name: 'AdminHome' })
+      this.$router.push({ name: 'UserHome' })
     }
   },
   created() {
@@ -146,7 +146,7 @@ export default {
             this.$cookies.set('user.email', this.user.email, { expires: '30d' })
             this.$cookies.set('user.password', this.user.password, { expires: '30d' })
           }
-          this.$router.push({ name: 'AdminHome' })
+          this.$router.push({ name: 'UserHome' })
           this.setUserInfo(profile)
         })
         .catch((err) => {

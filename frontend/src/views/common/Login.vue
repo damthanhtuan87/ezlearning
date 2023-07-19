@@ -26,8 +26,7 @@
                         v-model="user.email"
                         :rules="
                           'required|email:' +
-                          $t('admins.email') +
-                          ',abc@gmail.com'
+                          $t('admins.email')
                         "
                         ref="firstFocus"
                       />
@@ -123,7 +122,7 @@ export default {
       firstFocus?.$el.focus()
     }
     if (this.$auth.isLoggedIn()) {
-      this.$router.push({ name: 'HotelHome' })
+      this.$router.push({ name: 'AdminHome' })
     }
   },
   created() {
@@ -147,7 +146,7 @@ export default {
             this.$cookies.set('user.email', this.user.email, { expires: '30d' })
             this.$cookies.set('user.password', this.user.password, { expires: '30d' })
           }
-          this.$router.push({ name: 'HotelHome' })
+          this.$router.push({ name: 'AdminHome' })
           this.setUserInfo(profile)
         })
         .catch((err) => {

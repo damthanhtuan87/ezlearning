@@ -39,7 +39,7 @@ export default {
     AppSidebar,
   },
   created() {
-    this.routeRedirect =  this.$auth.getUser().role === 'admin' ? 'HotelHome' : 'CleanHome'
+    this.routeRedirect =  this.$auth.getUser().role === 'admin' ? 'AdminHome' : 'CleanHome'
   },
 }
 </script>

@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\AuthController;
-use App\Http\Controllers\Api\Admin\AccountSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes for Admins
+| API Routes for User
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -15,26 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 /*
 * API with Auth
-*/
-
-Route::group(['middleware' => ['auth:api_admin', 'common.auth:admin']], function () {
-    /**************************
-     ***** ACCOUNT ROUTER *****
-     **************************/
-    Route::apiResource('/accounts', AccountSettingController::class);
-
-
-    Route::controller(AuthController::class)->prefix('auth')->group(function () {
-        Route::post('resent-password', 'resendConfirmEmail')->name('password.resend');
-    });
-});
-
-
-/*
-* API No Auth
 */
 
 
@@ -42,7 +22,7 @@ Route::group(['middleware' => ['auth:api_admin', 'common.auth:admin']], function
  ***** AUTHENTICATION *****
  **************************/
 
-Route::controller(AuthController::class)->prefix('auth')->group(function () {
+ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::middleware(['throttle:login'])->group(function () {
         Route::post('login', 'login');
     });

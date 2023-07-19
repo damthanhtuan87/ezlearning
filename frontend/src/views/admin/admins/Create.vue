@@ -47,8 +47,7 @@
                     v-model="entry.email"
                     :rules="
                       'required|email:' +
-                      $t('admins.email') +
-                      ',abc@gmail.com'
+                      $t('admins.email')
                     "
                     label="admins.email"
                     :disabled="isEditScreen()"
@@ -89,6 +88,43 @@
                     </div>
                     <label :class="isEditScreen ? 'form-check-label ' : 'form_label cursor_auto'" for="inValid">{{
                         $t('fields.in_valid')
+                      }}</label>
+                  </div>
+                </CCol>
+              </CRow>
+              <CRow class="mb-3">
+                <CCol :lg="3" :xs="configs.grids.xs">
+                  <label class="form_label col-form-label">
+                    {{ $t('admins.role') }}<span class="required">*</span>
+                  </label>
+                </CCol>
+                <CCol :lg="9" :xs="configs.grids.xs">
+                  <div class="d-flex mt-1">
+                    <div>
+                      <input
+                        name="role"
+                        class="form-check-input mr-10"
+                        id="admin"
+                        type="radio"
+                        :value="ACCOUNT_ROLE.ADMIN"
+                        v-model="entry.role"
+                      />
+                    </div>
+                    <label :class="isEditScreen ? 'form-check-label ' : 'form_label cursor_auto'" for="valid">{{
+                        $t('fields.admin')
+                      }}</label>
+                    <div class="ml-50">
+                      <input
+                        name="role"
+                        class="form-check-input mr-10"
+                        id="user"
+                        type="radio"
+                        :value="ACCOUNT_ROLE.USER"
+                        v-model="entry.role"
+                      />
+                    </div>
+                    <label :class="isEditScreen ? 'form-check-label ' : 'form_label cursor_auto'" for="inValid">{{
+                        $t('fields.user')
                       }}</label>
                   </div>
                 </CCol>
@@ -136,6 +172,7 @@
 import {
   ACCOUNT_STATUS,
   COLUMN_CONFIG,
+  ACCOUNT_ROLE,
 } from '@/config/consts'
 import ConfirmNavigation from '@/components/Common/Modal/ConfirmNavigation.vue'
 import CommonCreate from '@/views/common/Create.vue'
@@ -152,11 +189,13 @@ export default {
       typeScreen: 'create',
       configs: COLUMN_CONFIG,
       ACCOUNT_STATUS: ACCOUNT_STATUS,
+      ACCOUNT_ROLE,
       entry: {
         id: '',
         name: '',
         email: '',
         status: ACCOUNT_STATUS.VALID,
+        role: ACCOUNT_ROLE.ADMIN,
       },
       repositoryName: 'account',
       routerListScreenName: 'ListAccount',

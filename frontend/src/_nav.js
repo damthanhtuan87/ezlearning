@@ -1,25 +1,6 @@
 export default [
   {
     component: 'CNavGroup',
-    name: 'hotel_management',
-    icon: 'cil-building',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'hotel_list',
-        routeName: 'HotelList',
-        to: '/hotel/list',
-      },
-      {
-        component: 'CNavItem',
-        name: 'hotel_add',
-        routeName: 'HotelCreate',
-        to: '/hotel/create',
-      },
-    ],
-  },
-  {
-    component: 'CNavGroup',
     name: 'account_management',
     icon: 'cib-opsgenie',
     items: [
@@ -27,13 +8,13 @@ export default [
         component: 'CNavItem',
         name: 'account_setting',
         routeName: 'ListAccount',
-        to: '/account/list',
+        to: '/admin/accounts',
       },
       {
         component: 'CNavItem',
         name: 'account_add_new',
         routeName: 'CreateAccount',
-        to: '/account/create',
+        to: '/admin/accounts/create',
       },
     ],
   },

@@ -5,6 +5,7 @@ import {isAvailableRoute} from '@/utils/roleCheck'
 import {ACCESS_TOKEN_KEY, ACTOR_REDIRECTS, USER_INFO_KEY} from '@/config/consts'
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import qs from 'qs';
+import { userPublicPages, userRoutes } from './roles/users'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -13,6 +14,7 @@ const router = createRouter({
   routes: [
     ...commonRoutes,
     ...adminRoutes(DefaultLayout),
+    ...userRoutes(DefaultLayout),
   ],
 
   scrollBehavior() {
@@ -38,7 +40,7 @@ router.beforeEach(async (to) => {
   const routeName = to.name
 
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = [...commonPublicPages, ...adminPublicPages]
+  const publicPages = [...commonPublicPages, ...adminPublicPages, ...userPublicPages]
   const authRequired = !publicPages.includes(routeName)
 
   // redirect to login if error 401 or can't access URL
@@ -59,8 +61,8 @@ router.beforeEach(async (to) => {
 
 function setPathAccess(to){
   let path = to.path
-  const paths = ['admin', 'clean', 'customer'];
-  let pathAccess = 'common_login';
+  const paths = ['admin'];
+  let pathAccess = 'user';
 
   for (let indx in paths) {
     if(path.includes(paths[indx])){
