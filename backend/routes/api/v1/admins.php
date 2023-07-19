@@ -24,7 +24,9 @@ Route::group(['middleware' => ['auth:api_admin', 'common.auth:admin']], function
     /**************************
      ***** ACCOUNT ROUTER *****
      **************************/
+    Route::get('/accounts/get-setted-users-modal', [AccountSettingController::class, 'getListSettedUserModal'])->name('accounts.get-users-modal');
     Route::apiResource('/accounts', AccountSettingController::class);
+    Route::apiResource('/courses', CourseController::class);
 
 
     Route::controller(AuthController::class)->prefix('auth')->group(function () {

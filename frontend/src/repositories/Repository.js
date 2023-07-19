@@ -3,6 +3,7 @@ import AuthRepository from '@/repositories/client/AuthRepository'
 import MasterRepository from '@/repositories/client/MasterRepository'
 import AccountRepository from "@/repositories/client/AccountRepository";
 import TransmissionRepository from '@/repositories/client/TransmissionRepository'
+import CourseRepository from '@/repositories/client/CourseRepository'
 
 const Plugin = (app) => {
   const repo = {
@@ -11,6 +12,7 @@ const Plugin = (app) => {
     master: MasterRepository(app.$axios),
     account: AccountRepository(app.$axios),
     transmission: TransmissionRepository(app.$axios),
+    course: CourseRepository(app.$axios),
     // TODO add other repository
     // Usage: this.$repositories.user.update()
   }

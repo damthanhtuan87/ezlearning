@@ -16,4 +16,7 @@ export default axios => ({
   delete(adminId, params) {
     return axios.delete(`${ADMIN_URIS.ACCOUNT}/${adminId}`, { params })
   },
+  getListUserModal(params) {
+    return axios.get(ADMIN_URIS.ACCOUNT + '/get-setted-users-modal', { params: params })
+  },
 })

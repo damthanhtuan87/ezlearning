@@ -2,8 +2,10 @@
 
 namespace App\Services\Impl;
 
+use App\Http\Parameters\Criteria;
 use App\Repositories\Impl\AccountRepository;
 use App\Services\AccountSettingService;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
@@ -47,5 +49,10 @@ class AccountSettingServiceImpl extends BaseServiceImpl implements AccountSettin
             DB::rollBack();
             throw new \Exception(__('messages.create_fail'));
         }
+    }
+
+    public function getListSettedUserModal(Criteria $criteria, $selectedProductList) : ?LengthAwarePaginator
+    {
+        return parent::list($criteria);
     }
 }

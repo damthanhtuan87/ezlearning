@@ -56,8 +56,26 @@ export const adminRoutes = (DefaultLayout) => [
         name: 'TransmissonLogs',
         component: () => import('@/views/admin/transmissions/List.vue'),
       },
+      {
+        path: '/admin/courses',
+        name: 'ListCourse',
+        component: () => import('@/views/admin/courses/List.vue'),
+      },
+      {
+        path: '/admin/courses',
+        name: 'Courses',
+        redirect: '/admin/courses',
+        children: [
+          {
+            path: '/admin/courses/create',
+            name: 'CreateCourse',
+            component: () => import('@/views/admin/courses/Create.vue'),
+          },
+        ],
+      },
     ],
   },
+
 ]
 
 export const adminPublicPages = [

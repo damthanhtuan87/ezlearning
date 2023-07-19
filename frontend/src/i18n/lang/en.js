@@ -64,6 +64,20 @@ const en = {
       patch: 'Patch'
     },
   },
+
+  courses : {
+    search_name_courses: "Course name",
+    search_topic_of_courses: "Topic of courses",
+    title_list: "Course List",
+    title_create: "Add New Course",
+    title_update: "Update Course",
+    name: "Name",
+    description: "Description",
+    user_name: "User Name",
+    email: 'Email',
+    id: 'ID',
+  },
+
 }
 
 en.messages = {
@@ -87,6 +101,9 @@ en.menu = {
   hotel_list: "Hotel List",
   hotel_add: "Add Hotel",
   transmission_management: "Transmission Logs",
+  course_management: "Courses",
+  courses: "List Courses",
+  course_add: "Add New Course",
   logout: 'Log Out',
 }
 
@@ -119,6 +136,9 @@ en.buttons = {
   no: 'No',
   yes: 'Yes',
   confirm: 'Confirm',
+  delete: 'Delete',
+  edit: 'Edit',
+  register: 'Register'
 }
 
 // Common text for screens
@@ -133,9 +153,17 @@ en.common = {
     edit: 'Edit',
     Resend_Login_Url: 'Resend login URL'
   },
+  course_view: {
+    course_id: 'Course ID',
+    course_name: 'Name',
+    course_description: 'Description',
+    action: 'Action',
+    quantity: 'Quantity'
+  },
   no_data: 'No data found',
   label_perpage: 'Page',
   label_column_no: 'No.',
+  action: 'Action'
 }
 
 // modal
@@ -143,7 +171,8 @@ en.modals = {
   logout_modal: {
     title: 'Logout Confirm',
     content: 'Are you sure ?',
-  }
+  },
+  user_selection: 'User Modal',
 }
 
 export default en

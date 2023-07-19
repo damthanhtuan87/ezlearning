@@ -7,6 +7,7 @@ export const ADMIN_URIS = {
   DASHBOARD: ADMIN_SCHEMA + '/dashboards',
   ACCOUNT: ADMIN_SCHEMA + '/accounts',
   TRANSMISSION: ADMIN_SCHEMA + '/transmission-logs',
+  COURSE: ADMIN_SCHEMA + '/courses',
 }
 
 // Path router for user

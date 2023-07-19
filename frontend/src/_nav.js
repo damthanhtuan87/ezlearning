@@ -25,6 +25,25 @@ export default [
     to: '/admin/transmission-logs',
     icon: 'cil-swap-horizontal',
   },
+  {
+    component: 'CNavGroup',
+    name: 'course_management',
+    icon: 'cib-opsgenie',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'courses',
+        routeName: 'ListCourse',
+        to: '/admin/courses',
+      },
+      {
+        component: 'CNavItem',
+        name: 'course_add',
+        routeName: 'CreateCourse',
+        to: '/admin/courses/create',
+      },
+    ],
+  },
 
   // BLOCK MASTER NAV
   // {

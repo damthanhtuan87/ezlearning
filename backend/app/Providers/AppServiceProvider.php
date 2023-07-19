@@ -5,17 +5,21 @@ namespace App\Providers;
 use App\Macros\StrMixins;
 use App\Repositories\AccountRepositoryInterface;
 use App\Repositories\BaseRepositoryInterface;
+use App\Repositories\CourseRepositoryInterface;
 use App\Repositories\HotelRepositoryInterface;
 use App\Repositories\Impl\AccountRepository;
 use App\Repositories\Impl\BaseRepository;
+use App\Repositories\Impl\CourseRepository;
 use App\Repositories\Impl\HotelRepository;
 use App\Services\AccountSettingService;
 use App\Repositories\Impl\TransmissionLogRepository;
 use App\Repositories\TransmissionLogRepositoryInterface;
 use App\Services\BaseService;
+use App\Services\CourseService;
 use App\Services\HotelService;
 use App\Services\Impl\AccountSettingServiceImpl;
 use App\Services\Impl\BaseServiceImpl;
+use App\Services\Impl\CourseServiceImpl;
 use App\Services\Impl\HotelServiceImpl;
 use App\Services\Impl\TransmissionLogServiceImpl;
 use App\Services\TransmissionLogService;
@@ -57,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
             AccountSettingService::class => AccountSettingServiceImpl::class,
             HotelService::class => HotelServiceImpl::class,
             TransmissionLogService::class => TransmissionLogServiceImpl::class,
+            CourseService::class => CourseServiceImpl::class
         ];
     }
 
@@ -72,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
             AccountRepositoryInterface::class => AccountRepository::class,
             HotelRepositoryInterface::class => HotelRepository::class,
             TransmissionLogRepositoryInterface::class => TransmissionLogRepository::class,
+            CourseRepositoryInterface::class => CourseRepository::class,
         ];
     }
 

@@ -87,6 +87,18 @@ class Account extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Filter by role
+     *
+     * @param Builder $query
+     * @param $role
+     * @return Builder
+     */
+    public function scopeUserRole(Builder $query, $userRole): Builder
+    {
+        return $query->where('role', '=', $userRole);
+    }
+
+    /**
      * Scope a query to set a default order.
      *
      * @param Builder $query
