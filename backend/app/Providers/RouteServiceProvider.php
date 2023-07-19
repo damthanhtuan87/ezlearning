@@ -19,8 +19,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
     protected string $apiNamespace = 'App\Http\Controllers\Api';
-    protected string $adminsNameSpace = 'App\Http\Controllers\Api';
-    protected string $tllNameSpace = 'App\Http\Controllers\Api\TLLincon';
+    protected string $adminsNameSpace = 'App\Http\Controllers\Api\Admin';
+    protected string $usersNameSpace = 'App\Http\Controllers\Api\User';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -41,9 +41,9 @@ class RouteServiceProvider extends ServiceProvider
                 Route::prefix('admins')
                     ->namespace($this->adminsNameSpace)
                     ->group(base_path('routes/api/v1/admins.php')); // Admin
-                Route::prefix('tll')
-                    ->namespace($this->tllNameSpace)
-                    ->group(base_path('routes/api/v1/tll.php')); // TLLincoln
+                Route::prefix('users')
+                    ->namespace($this->usersNameSpace)
+                    ->group(base_path('routes/api/v1/users.php')); // TLLincoln
             });
             // End API v1
 

@@ -24,6 +24,7 @@ define('MAX_LOGIN_FAIL', 10);
 
 // Account role
 define('ROLE_ADMIN', 1);
+define('ROLE_USER', 2);
 
 //TimeLock
 define('TIME_LOCK_LOGIN', 1);

@@ -14,11 +14,15 @@ export const ACCOUNT_STATUS = {
   INVALID: '0',
 }
 
+export const ACCOUNT_ROLE = {
+  ADMIN: '1',
+  USER: '2',
+}
+
 export const ACTOR_REDIRECTS = {
   admin: '/admin/login',
-  clean: '/clean/login',
-  customer: '/customer/login',
-  common_login: '/login',
+  user: '/login',
+  // common_login: '/login',
 }
 
 /**

@@ -1,61 +1,51 @@
 export const adminRoutes = (DefaultLayout) => [
   {
     path: '/',
-    name: 'HotelHome',
+    name: 'AdminHome',
     redirect: '/admin',
   },
   {
-    path: '/login',
+    path: '/admin/login',
     name: 'AdminLogin',
     component: () => import('@/views/admin/auth/Login'),
   },
   {
-    path: '/request-password',
+    path: '/admin/request-password',
     name: 'AdminRequestPassword',
     component: () => import('@/views/admin/auth/RequestPassword'),
   },
   {
-    path: '/reset-password',
+    path: '/admin/reset-password',
     name: 'AdminResetPassword',
     component: () => import('@/views/admin/auth/ResetPassword'),
   },
   {
-    path: '/logout',
+    path: '/admin/logout',
     name: 'AdminLogout',
   },
   {
-    path: '/hotel',
-    name: 'HotelHome',
+    path: '/admin',
+    name: 'AdminHome',
     component: DefaultLayout,
-    redirect: '/hotel/list',
+    redirect: '/admin/accounts',
     children: [
       {
-        path: '/hotel/create',
-        name: 'HotelCreate',
-        component: () => import('@/views/admin/admins/Create.vue'),
-      },
-      {
-        path: '/hotel/list',
-        name: 'HotelList',
-        component: () => import('@/views/admin/admins/List.vue'),
-      },
-      {
-        path: '/account/list',
+        path: '/admin/accounts',
         name: 'ListAccount',
         component: () => import('@/views/admin/admins/List.vue'),
       },
       {
-        path: '/account',
+        path: '/admin/accounts',
         name: 'AccountSetting',
-        redirect: '/account/list',
+        redirect: '/admin/accounts',
         children: [
           {
-            path: '/account/create',
+            path: '/admin/accounts/create',
             name: 'CreateAccount',
             component: () => import('@/views/admin/admins/Create.vue'),
           },
           {
-            path: '/accounts/edit/:id',
+            path: '/admin/accounts/edit/:id',
             name: 'UpdateAccount',
             component: () => import('@/views/admin/admins/Create.vue'),
           },

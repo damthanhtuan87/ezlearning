@@ -25,8 +25,7 @@
                           v-model="email"
                           :rules="
                             'required|email:' +
-                            $t('admins.email') +
-                            ',abc@gmail.com'
+                            $t('admins.email')
                           "
                           ref="firstFocus"
                         />

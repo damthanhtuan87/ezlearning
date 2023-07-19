@@ -103,6 +103,8 @@ en.validations = {
 en.fields = {
   valid: 'Valid',
   in_valid: 'Invalid',
+  admin: 'Admin',
+  user: 'User',
 }
 
 // Common text for screens

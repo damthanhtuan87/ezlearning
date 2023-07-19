@@ -9,7 +9,8 @@ export const ADMIN_URIS = {
   TRANSMISSION: ADMIN_SCHEMA + '/transmission-logs',
 }
 
-// Path router for cleaning factory
-export const GENERAL_URIS = {
-  AUTH: '/auth',
+// Path router for user
+const USER_SCHEMA = '/users'
+export const USER_URIS = {
+  AUTH: USER_SCHEMA + '/auth',
 }

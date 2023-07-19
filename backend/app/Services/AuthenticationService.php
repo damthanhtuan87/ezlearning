@@ -43,6 +43,12 @@ class AuthenticationService
                 $token = Auth::guard($guard)->attempt($credentials);
                 break;
             }
+            case 'api_user' : {
+                $guard = 'api_user';
+                $role = ROLE_USER;
+                $token = Auth::guard($guard)->attempt($credentials);
+                break;
+            }
             default : {
                 $tokenAdmin = Auth::guard('api_admin')->attempt($credentials);
                 if ($tokenAdmin) {

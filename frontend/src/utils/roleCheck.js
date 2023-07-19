@@ -12,6 +12,8 @@ export const isAvailableRoute = (routeName) => {
   switch (user.role) {
     case 'admin':
       return isAvailableAdminRoute(user, routeName)
+    case 'user':
+      return isAvailableUserRoute(routeName)
     default:
       return false
   }
@@ -43,6 +45,20 @@ function isAvailableAdminRoute(user, routeName) {
   //     break;
   // }
 
+  isExist = isRouteInlist([...commonRoutes, ...adminRoutes(DefaultLayout)], routeName)
+
+  // if route not exists
+  if (!isExist) {
+    return false
+  }
+
+  return true
+}
+
+function isAvailableUserRoute(routeName) {
+
+  // check route with each type (actor)
+  let isExist
   isExist = isRouteInlist([...commonRoutes, ...adminRoutes(DefaultLayout)], routeName)
 
   // if route not exists
