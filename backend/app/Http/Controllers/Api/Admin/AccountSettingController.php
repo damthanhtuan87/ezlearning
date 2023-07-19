@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Parameters\Criteria;
 use App\Http\Requests\AccountRequest;
 use App\Services\AccountSettingService;
 use Illuminate\Http\JsonResponse;
@@ -23,6 +24,20 @@ class AccountSettingController extends BaseController
         parent::__construct($service, $request);
     }
 
+      /**
+     * Get list productSetted
+     *
+     * @return JsonResponse
+     */
+    public function getListSettedUserModal(): JsonResponse
+    {
+        $selectedUserList = [];
+        return $this->success(
+            $this->service->getListSettedUserModal(Criteria::createFromRequest($this->request), $selectedUserList),
+            Response::HTTP_OK
+        );
+    }
+
     /**
      * Get FormRequest validation
      *
@@ -32,4 +47,5 @@ class AccountSettingController extends BaseController
     {
         return AccountRequest::class;
     }
+
 }
