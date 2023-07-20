@@ -73,6 +73,29 @@ export const adminRoutes = (DefaultLayout) => [
           },
         ],
       },
+      // QUESTIONS AND ANSWERS
+      {
+        path: '/admin/qna',
+        name: 'ListQuestionAnswer',
+        component: () => import('@/views/admin/qna/List.vue'),
+      },
+      {
+        path: '/admin/qna',
+        name: 'QuestionAnswer',
+        redirect: '/admin/qna',
+        children: [
+          {
+            path: '/admin/qna/create',
+            name: 'CreateQuestionAnswer',
+            component: () => import('@/views/admin/qna/Create.vue'),
+          },
+          {
+            path: '/admin/qna/edit/:id',
+            name: 'UpdateQuestionAnswer',
+            component: () => import('@/views/admin/qna/Create.vue'),
+          },
+        ],
+      },
     ],
   },
 

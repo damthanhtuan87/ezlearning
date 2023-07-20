@@ -44,6 +44,26 @@ export default [
       },
     ],
   },
+  // QUESTIONS AND ANSWERS
+  {
+    component: 'CNavGroup',
+    name: 'qna_management',
+    icon: 'cib-opsgenie',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'qna_list',
+        routeName: 'ListQuestionAnswer',
+        to: '/admin/qna',
+      },
+      {
+        component: 'CNavItem',
+        name: 'qna_add',
+        routeName: 'CreateQuestionAnswer',
+        to: '/admin/qna/create',
+      },
+    ],
+  },
 
   // BLOCK MASTER NAV
   // {

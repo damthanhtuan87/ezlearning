@@ -65,6 +65,16 @@ const en = {
     },
   },
 
+  // QUESTIONS AND ANSWERS
+  qna: {
+    title_list: 'List Q&A',
+    title_create: 'Add New Q&A',
+    title_update: 'Edit Q&A',
+  },
+
+  search: { 
+  },
+
   courses : {
     search_name_courses: "Course name",
     search_topic_of_courses: "Topic of courses",
@@ -105,6 +115,11 @@ en.menu = {
   courses: "List Courses",
   course_add: "Add New Course",
   logout: 'Log Out',
+
+  // QUESTIONS AND ANSWERS
+  qna_management: 'Questions Answers',
+  qna_list: ' List Q&A',
+  qna_add: 'Add New Q&A',
 }
 
 // Validations text
@@ -143,6 +158,12 @@ en.buttons = {
 
 // Common text for screens
 en.common = {
+  action: 'Actions',
+  actions: {
+    edit: 'Edit',
+    delete: 'Delete',
+    view: 'View',
+  },
   account_view: {
     title: 'Account Setting',
     email_search: 'Email/Name',
@@ -163,7 +184,13 @@ en.common = {
   no_data: 'No data found',
   label_perpage: 'Page',
   label_column_no: 'No.',
-  action: 'Action'
+
+  // QUESTIONS AND ANSWERS
+  qna_view: {
+    title: 'List Q&A',
+    question: 'Question',
+    describe: 'Describe',
+  }
 }
 
 // modal
