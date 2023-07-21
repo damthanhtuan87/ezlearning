@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->integer('score');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

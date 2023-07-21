@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('time_practice');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
