@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('emailable_id')->nullable();
             $table->string('emailable_type')->nullable();
             $table->timestamp('created_at')->nullable();
+            $table->softDeletes();
         });
     }
 
