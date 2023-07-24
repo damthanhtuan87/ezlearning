@@ -200,6 +200,7 @@ en.modals = {
     content: 'Are you sure ?',
   },
   user_selection: 'User Modal',
+  course_selection: 'Course Modal',
 }
 
 export default en
