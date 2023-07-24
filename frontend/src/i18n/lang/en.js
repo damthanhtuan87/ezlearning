@@ -138,7 +138,8 @@ en.buttons = {
   confirm: 'Confirm',
   delete: 'Delete',
   edit: 'Edit',
-  register: 'Register'
+  register: 'Register',
+  add_user: 'Add User',
 }
 
 // Common text for screens

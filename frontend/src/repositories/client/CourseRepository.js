@@ -4,15 +4,15 @@ export default axios => ({
   list(params) {
     return axios.get(ADMIN_URIS.COURSE, { params: params })
   },
-  // get(adminId) {
-  //   return axios.get(`${ADMIN_URIS.ACCOUNT}/${adminId}`)
-  // },
+  get(courseId) {
+    return axios.get(`${ADMIN_URIS.COURSE}/${courseId}`)
+  },
   create(params) {
     return axios.post(ADMIN_URIS.COURSE, params)
   },
-  // update(adminId, params) {
-  //   return axios.put(`${ADMIN_URIS.ACCOUNT}/${adminId}`, params)
-  // },
+  update(courseId, params) {
+    return axios.put(`${ADMIN_URIS.COURSE}/${courseId}`, params)
+  },
   delete(courseId, params) {
     return axios.delete(`${ADMIN_URIS.COURSE}/${courseId}`, { params })
   },

@@ -8,4 +8,5 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface CourseService extends BaseService
 {
+    public function update($id, array $data): Model;
 }

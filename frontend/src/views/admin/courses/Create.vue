@@ -45,60 +45,33 @@
                     rows="4"
                     type="text"
                     maxlength="255"
-                    v-model="entry.description"
+                    v-model="entry.descriptions"
                     rules="required"
                     label="courses.description"
                   />
                   <ErrorMessage name="description" />
                 </CCol>
               </CRow>
-              <CRow class="mb-3">
-                <CCol :lg="configs.grids.label" :xs="configs.grids.xs">
-                  <label class="form-label">
-                    {{ $t('courses.user_name') }}<span class="required">*</span>
-                  </label>
-                </CCol>
-                <CCol :lg="configs.grids.input" :xs="configs.grids.xs">
-                  <CInputGroup>
-                    <vee-field
-                      id="userName"
-                      name="userName"
-                      class="form-control"
-                      type="text"
-                      hidden
-                    />
-                    <vee-field
-                      id="user_name"
-                      name="user_name"
-                      class="form-control border-group-field"
-                      type="text"
-                      maxlength="64"
-                      rules="required"
-                      disabled
-                      label="courses.user_name"
-                    />
-                    <CButton
-                      type="button"
-                      color="primary"
-                      variant="outline"
-                      id="button-addon2"
-                      class="btn-modal"
-                      @click="openSelectedUserModal()"
-                    >
-                      <CIcon icon="cilSearch" />
-                    </CButton>
-                  </CInputGroup>
-                  <ErrorMessage name="user_name" />
-                </CCol>
-              </CRow>
               <div
-                class="subDatatableContainer"
+                class="subDatatableContainer mt-3"
                 style="
                    {
                     height: 100%;
                   }
                 "
               >
+                <CCol>
+                  <CButton
+                    class="btn-right mb-3"
+                    type="button"
+                    color="primary"
+                    variant="outline"
+                    id="button-addon2"
+                    @click="openSelectedUserModal()"
+                  >
+                    {{ $t('buttons.add_user') }}
+                  </CButton>
+                </CCol>
                 <div
                   class="subDatatableWrapper"
                   style="
@@ -116,16 +89,12 @@
                         <CTableHeaderCell
                           class="text-center"
                           style="width: 8%"
-                          >{{
-                            $t('courses.name')
-                          }}</CTableHeaderCell
+                          >{{ $t('courses.name') }}</CTableHeaderCell
                         >
                         <CTableHeaderCell
                           class="text-center"
                           style="width: 20%"
-                          >{{
-                            $t('courses.email')
-                          }}</CTableHeaderCell
+                          >{{ $t('courses.email') }}</CTableHeaderCell
                         >
                         <CTableHeaderCell
                           class="text-center"
@@ -136,7 +105,7 @@
                     </CTableHead>
                     <CTableBody>
                       <CTableRow
-                        v-if="entry.products.length === 0"
+                        v-if="entry.course_accounts.length === 0"
                         class="noData"
                       >
                         <CTableDataCell colspan="100%">
@@ -147,19 +116,19 @@
                       </CTableRow>
                       <CTableRow
                         v-else
-                        v-for="(product, productIdx) in entry.products"
-                        :key="'product_' + productIdx"
+                        v-for="(user, userIdx) in entry.course_accounts"
+                        :key="'user_' + userIdx"
                       >
                         <CTableDataCell class="text-center">
                           <datatable-tooltip
-                            :text="(productIdx + 1).toString()"
+                            :text="(userIdx + 1).toString()"
                           />
                         </CTableDataCell>
                         <CTableDataCell>
-                          <datatable-tooltip :text="product.name" />
+                          <datatable-tooltip :text="user.name" />
                         </CTableDataCell>
                         <CTableDataCell>
-                          <datatable-tooltip :text="product.email" />
+                          <datatable-tooltip :text="user.email" />
                         </CTableDataCell>
                         <!-- <CTableDataCell class="text-center icon-delete">
                           <CTooltip
@@ -172,7 +141,7 @@
                                   icon="fa-solid fa-trash"
                                   color="red"
                                   class="icon-font-size"
-                                  @click="removeStaff(productIdx)"
+                                  @click="removeStaff(userIdx)"
                                 />
                               </a>
                             </template>
@@ -199,7 +168,7 @@
                   </CButton>
                   <CButton type="submit" color="primary" class="btn btn-action">
                     {{
-                      !isEditScreen ? $t('buttons.save') : $t('buttons.save')
+                      !isEditScreen ? $t('buttons.save') : $t('buttons.register')
                     }}
                   </CButton>
                 </CCol>
@@ -212,7 +181,7 @@
     <SelectedUserModal
       :visible="visibleUserSelectModal"
       :close-callback="closeSelectedUserModal"
-      :initial-data="productList"
+      :initial-data="userList"
       :set-data-callback="setUserListCallback"
       :params-modal="paramsModal"
     />
@@ -238,12 +207,14 @@ export default {
       ACCOUNT_STATUS: ACCOUNT_STATUS,
       ACCOUNT_ROLE,
       entry: {
-        products: [],
+        course_accounts: [],
+        name: '',
+        descriptions: '',
       },
-      repositoryName: 'account',
+      repositoryName: 'course',
       routerListScreenName: 'ListCourse',
       visibleUserSelectModal: false,
-      productList: [],
+      userList: [],
       initData: {},
       paramsModal: {},
     }
@@ -253,38 +224,45 @@ export default {
     return this.checkDirty(to)
   },
   methods: {
-    // async initEdit() {
-    //   this.typeScreen = 'edit'
-    //   await this.$repositories[this.repositoryName]
-    //     .get(this.$route.params.id)
-    //     .then((res) => {
-    //       const data = res.data.results
-    //       data.status = data.status.toString()
-    //       this.initData = { ...data }
-    //       this.entry = { ...data }
-    //       if (
-    //         this.typeScreen === 'edit' &&
-    //         this.isNotSetPasswordAndValidMail
-    //       ) {
-    //         this.displayButtonSendMail = true
-    //       }
-    //     })
-    //     .catch(() => {
-    //       this.dirtyCheck = false
-    //       this.$router.push({
-    //         name: 'Page404',
-    //       })
-    //     })
-    // },
+    async initEdit() {
+      this.typeScreen === 'edit'
+      await this.$repositories[this.repositoryName]
+        .get(this.$route.params.id)
+        .then((res) => {
+          const data = res.data.results
+          this.initData = { ...data }
+          this.entry = { ...data }
+        })
+        .catch(() => {
+          this.dirtyCheck = false
+          this.$router.push({
+            name: 'Page404',
+          })
+        })
+    },
+    handleUpdate(data) {
+      console.log(data)
+      this.$repositories[this.repositoryName]
+        .update(data.id, data)
+        .then((response) => {
+          this.$toast.success(response.data.message)
+          this.dirtyCheck = false
+          this.backToList()
+        })
+        .catch((response) => {
+          this.$toast.error(response.message)
+        }).finally(() => {
+        })
+    },
     openSelectedUserModal() {
-      this.productList = []
+      this.userList = []
       this.visibleUserSelectModal = true
     },
     closeSelectedUserModal() {
       this.visibleUserSelectModal = false
     },
-    setUserListCallback(productList) {
-      this.entry.products = [...this.entry.products, ...productList]
+    setUserListCallback(userList) {
+      this.entry.course_accounts = [...this.entry.course_accounts, ...userList]
     },
   },
 }

@@ -80,16 +80,20 @@
                 {{ props.item.total_quantity }}
               </CTableDataCell>
               <CTableDataCell class="text-center my-3 action-col">
-                <div class="d-inline-flex mr-2">
-                  <CButton
-                    class="btn-action mr-0"
-                    type="button"
-                    color="primary"
-                    @click="handleSendMail(props.item.email)"
-                    >{{ $t('buttons.edit') }}
-                  </CButton>
-                </div>
-                <div class="d-inline-flex ml-2">
+                  <router-link
+                    :to="{
+                      name: 'UpdateCourse',
+                      params: { id: props.item.id },
+                    }"
+                  >
+                    <CButton
+                      type="button"
+                      color="primary"
+                      class="btn-action mr-2"
+                    >
+                      {{ $t('buttons.edit') }}
+                    </CButton>
+                  </router-link>
                   <CButton
                     class="btn-action mr-0"
                     type="button"
@@ -97,7 +101,6 @@
                     @click="handleDelete(props.item)"
                     >{{ $t('buttons.delete') }}
                   </CButton>
-                </div>
               </CTableDataCell>
             </CTableRow>
           </template>
@@ -155,7 +158,7 @@ export default {
       }
     },
 
-     async handleDelete(item) {
+    async handleDelete(item) {
       if (item.status == ACCOUNT_STATUS.VALID) {
         this.visibleDeleteModal = false
         return this.$toast.error(
@@ -172,11 +175,11 @@ export default {
         })
         .catch((response) => {
           this.$toast.error(response.message)
-        }).finally(() => {
+        })
+        .finally(() => {
           this.visibleDeleteModal = false
         })
     },
-
   },
 }
 </script>

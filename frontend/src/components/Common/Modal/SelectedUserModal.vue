@@ -124,6 +124,7 @@ import DataTable from '@/components/Common/DataTable/DataTable'
 import sortIcon from '@/components/Common/SortIcon'
 import datatableTooltip from '@/components/Common/DataTable/Tooltip.vue'
 import { isEmptyArray, isNullOrUndefined } from '@/utils/functions'
+import { ACCOUNT_ROLE } from '@/config/consts'
 function initialSearch() {
   return {
     code: '',
@@ -138,6 +139,7 @@ function initialSearch() {
     selected_customer: '',
     selected_business_partner: '',
     is_from_modal: '1',
+    ACCOUNT_ROLE,
   }
 }
 
@@ -209,7 +211,7 @@ export default {
   },
   methods: {
     async getUsers(params) {
-      this.option_search.user_role = 0
+      this.option_search.user_role = ACCOUNT_ROLE.USER
       this.sort = params.sort
       let res = await this.$repositories[this.repositoryName].getListUserModal(
         Object.assign({}, params, {

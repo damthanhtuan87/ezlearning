@@ -6,6 +6,7 @@ use App\Http\Parameters\Criteria;
 use App\Models\Course;
 use App\Repositories\CourseRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -58,10 +59,29 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
                 'courses.created_at',
                 'courses.updated_at',
             ]);
-            
+
         return $this->applyOrderBy($query, $criteria->getSorts())
             ->with($this->getRelations($criteria))
             ->withCount($this->getCountRelations($criteria))
             ->paginate($criteria->getLimit(), ['*'], config('pagination.page_name'), $criteria->getPage());
+    }
+
+    /**
+     * Find model by id
+     *
+     * @param int|string $id
+     *
+     * @return Model|Collection
+     */
+    public function find($id): object
+    {
+        $dataModel = parent::find($id);
+        $courseAccountData = $dataModel->courseAccounts;
+        foreach ($courseAccountData as $courseAccount) {
+            $account = $courseAccount->account;
+            $courseAccount->name = $account->name;
+            $courseAccount->email = $account->email;
+        }
+        return $dataModel;
     }
 }

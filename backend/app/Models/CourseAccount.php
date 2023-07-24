@@ -32,4 +32,14 @@ class CourseAccount extends Authenticatable
         'end_date',
     ];
 
+    //Relation
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'account_id', 'id');
+    }
 }

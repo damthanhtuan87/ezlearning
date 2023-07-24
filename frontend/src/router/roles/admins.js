@@ -71,6 +71,11 @@ export const adminRoutes = (DefaultLayout) => [
             name: 'CreateCourse',
             component: () => import('@/views/admin/courses/Create.vue'),
           },
+          {
+            path: '/admin/courses/edit/:id',
+            name: 'UpdateCourse',
+            component: () => import('@/views/admin/courses/Create.vue'),
+          },
         ],
       },
     ],
