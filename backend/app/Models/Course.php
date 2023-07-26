@@ -48,6 +48,27 @@ class Course extends Authenticatable
         return $this->hasMany(CourseAccount::class, 'course_id', 'id');
     }
 
+    public function questions() {
+        return $this->hasManyThrough(
+            Question::class,
+            Topic::class,
+            'course_id',
+            'topic_id',
+            'id',
+            'id'
+        );
+    }
+
+    /**
+     * Scope search by course id.
+     * 
+     * @param $courseId $query
+     */
+    public function scopeCourseId(Builder $query, $courseId): Builder
+    {
+        return $query->where('courses.id', $courseId);
+    }
+
      /**
      * Scope search by course name.
      *

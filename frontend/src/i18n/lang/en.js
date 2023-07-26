@@ -75,7 +75,7 @@ const en = {
   search: { 
   },
 
-  courses : {
+  courses: {
     search_name_courses: "Course name",
     search_topic_of_courses: "Topic of courses",
     title_list: "Course List",
@@ -87,6 +87,10 @@ const en = {
     email: 'Email',
     id: 'ID',
   },
+
+  topics: {
+    search_name_topics: "Topic name",
+  }
 
 }
 
@@ -201,6 +205,7 @@ en.modals = {
   },
   user_selection: 'User Modal',
   course_selection: 'Course Modal',
+  topic_selection: 'Topic Modal',
 }
 
 export default en

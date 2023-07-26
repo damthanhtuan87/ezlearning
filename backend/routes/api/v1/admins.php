@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AccountSettingController;
 use App\Http\Controllers\Api\Admin\QuestionController;
+use App\Http\Controllers\Api\Admin\TopicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::group(['middleware' => ['auth:api_admin', 'common.auth:admin']], function
     Route::get('/accounts/get-setted-users-modal', [AccountSettingController::class, 'getListSettedUserModal'])->name('accounts.get-users-modal');
     Route::apiResource('/accounts', AccountSettingController::class);
     Route::apiResource('/courses', CourseController::class);
+    Route::apiResource('/topics', TopicController::class);
     Route::apiResource('/questions', QuestionController::class);
 
 

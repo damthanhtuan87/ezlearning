@@ -121,7 +121,8 @@ import { isEmptyArray, isNullOrUndefined } from '@/utils/functions'
 function initialSearch() {
   return {
     course_id: '',
-    course_name: '',
+    topic_id: '',
+    topic_name: '',
     is_from_modal: '1',
   }
 }
@@ -161,13 +162,13 @@ export default {
       type: Object,
       default: null,
     },
-    entryDataFromContractSet: {
-      type: Boolean,
-      default: false,
-    },
     hasDefaultQuantity: {
       type: Boolean,
       default: true,
+    },
+    courseId: {
+      type: Number,
+      default: null,
     },
   },
   data() {
@@ -179,7 +180,7 @@ export default {
       selectedAll: false,
       disabledAll: false,
       sort: {},
-      repositoryName: 'course',
+      repositoryName: 'topic',
     }
   },
   watch: {
@@ -197,6 +198,9 @@ export default {
   methods: {
     async getList(params) {
       this.option_search.user_role = 0
+      if (this.$props.courseId !== null) {
+        this.option_search.course_id = this.$props.courseId
+      }
       this.sort = params.sort
       let res = await this.$repositories[this.repositoryName].list(
         Object.assign({}, params, {

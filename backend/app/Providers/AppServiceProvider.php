@@ -12,7 +12,9 @@ use App\Repositories\Impl\BaseRepository;
 use App\Repositories\Impl\CourseRepository;
 use App\Repositories\Impl\HotelRepository;
 use App\Repositories\Impl\QuestionRepository;
+use App\Repositories\Impl\TopicRepository;
 use App\Repositories\QuestionRepositoryInterface;
+use App\Repositories\TopicRepositoryInterface;
 use App\Services\AccountSettingService;
 use App\Repositories\Impl\TransmissionLogRepository;
 use App\Repositories\TransmissionLogRepositoryInterface;
@@ -24,8 +26,10 @@ use App\Services\Impl\BaseServiceImpl;
 use App\Services\Impl\CourseServiceImpl;
 use App\Services\Impl\HotelServiceImpl;
 use App\Services\Impl\QuestionServiceImpl;
+use App\Services\Impl\TopicServiceImpl;
 use App\Services\Impl\TransmissionLogServiceImpl;
 use App\Services\QuestionService;
+use App\Services\TopicService;
 use App\Services\TransmissionLogService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -66,7 +70,8 @@ class AppServiceProvider extends ServiceProvider
             HotelService::class => HotelServiceImpl::class,
             TransmissionLogService::class => TransmissionLogServiceImpl::class,
             QuestionService::class => QuestionServiceImpl::class,
-            CourseService::class => CourseServiceImpl::class
+            CourseService::class => CourseServiceImpl::class,
+            TopicService::class => TopicServiceImpl::class,
         ];
     }
 
@@ -82,6 +87,7 @@ class AppServiceProvider extends ServiceProvider
             AccountRepositoryInterface::class => AccountRepository::class,
             HotelRepositoryInterface::class => HotelRepository::class,
             TransmissionLogRepositoryInterface::class => TransmissionLogRepository::class,
+            TopicRepositoryInterface::class => TopicRepository::class,
         ];
     }
 

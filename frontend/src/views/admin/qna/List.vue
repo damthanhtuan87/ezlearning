@@ -15,14 +15,14 @@
             />
           </CCol>
           <CCol :lg="configs.grids.lg" :xs="configs.grids.xs" class="mb-2">
-            {{ condition_search.selectedCourse || 1234 }}
-            <label for="" class="form-label">{{ $t('admins.search') }}</label>
+            <label for="" class="form-label">{{ $t('courses.search_name_courses') }}</label>
             <CInputGroup>
               <vee-field
                 id="userName"
                 name="userName"
                 class="form-control"
                 type="text"
+                v-model="selectedCourse.name"
                 hidden
               />
               <vee-field
@@ -32,7 +32,7 @@
                 type="text"
                 maxlength="64"
                 rules="required"
-                v-model="condition_search.selectedCourse"
+                v-model="selectedCourse.name"
                 disabled
               />
               <CButton
@@ -48,32 +48,38 @@
             </CInputGroup>
           </CCol>
           <CCol :lg="configs.grids.lg" :xs="configs.grids.xs" class="mb-2">
-            <CFormSelect
-              aria-label="Default select example"
-              :label="$t('admins.search')"
-              v-model="condition_search.topic_id"
-              :options="[
-                'Open this select menu',
-                { label: 'One', value: '1' },
-                { label: 'Two', value: '2' },
-                { label: 'Three', value: '3', disabled: true },
-              ]"
-            >
-            </CFormSelect>
-          </CCol>
-          <CCol :lg="configs.grids.lg" :xs="configs.grids.xs" class="mb-2">
-            <CFormSelect
-              aria-label="Default select example"
-              :label="$t('admins.search')"
-              v-model="condition_search.search"
-              :options="[
-                'Open this select menu',
-                { label: 'One', value: '1' },
-                { label: 'Two', value: '2' },
-                { label: 'Three', value: '3', disabled: true },
-              ]"
-            >
-            </CFormSelect>
+            <label for="" class="form-label">{{ $t('topics.search_name_topics') }}</label>
+            <CInputGroup>
+              <vee-field
+                id="userName"
+                name="userName"
+                class="form-control"
+                type="text"
+                v-model="selectedTopic.name"
+                hidden
+              />
+              <vee-field
+                id="user_name"
+                name="user_name"
+                class="form-control border-group-field"
+                type="text"
+                maxlength="64"
+                rules="required"
+                v-model="selectedTopic.name"
+                disabled
+              />
+              <CButton
+                type="button"
+                color="primary"
+                variant="outline"
+                id="button-addon2"
+                class="btn-modal"
+                :disabled="!selectedCourse.id"
+                @click="openSelectedTopicModal()"
+              >
+                <CIcon icon="cilSearch" />
+              </CButton>
+            </CInputGroup>
           </CCol>
         </CRow>
         <div class="divider"></div>
@@ -155,22 +161,23 @@
           </template>
         </data-table>
       </CCol>
+      <selected-course-modal
+        :visible="visibleSelectedCourseModal"
+        :close-callback="closeSelectedCourseModal"
+        :initial-data="[selectedCourse]"
+        :params-modal="paramsModal"
+        :set-data-callback="setCourseListCallback"
+      />
+      <selected-topic-modal
+        :visible="visibleSelectedTopicModal"
+        :close-callback="closeSelectedTopicModal"
+        :initial-data="[selectedTopic]"
+        :params-modal="paramsModal"
+        :set-data-callback="setTopicListCallback"
+        :course-id="selectedCourse.id"
+      />
     </CCardBody>
   </MainLayout>
-  <confirm-delete-modal
-    :visible="visibleDeleteModal"
-    @onClose="visibleDeleteModal = false"
-    @handleDelete="handleDelete(selectedItem)"
-  >
-    {{ $t('popup.text_delete', [$t('admins.name'), selectedItem.name]) }}
-  </confirm-delete-modal>
-  <selected-course-modal
-    :visible="visibleSelectedCourseModal"
-    :close-callback="closeSelectedUserModal"
-    :initial-data="[selectedCourse]"
-    :params-modal="paramsModal"
-    :set-data-callback="setCourseListCallback"
-  />
 </template>
 
 <script>
@@ -179,6 +186,7 @@ import { getItemLabelInArray } from '@/utils/functions'
 import CommonList from '@/views/common/CommonList.vue'
 import MainLayout from '@/layouts/MainLayout.vue'
 import SelectedCourseModal from '@/components/Common/Modal/SelectedCourseModal.vue'
+import SelectedTopicModal from '@/components/Common/Modal/SelectedTopicModal.vue'
 
 export default {
   name: 'QuestionList',
@@ -186,12 +194,14 @@ export default {
   components: {
     MainLayout,
     SelectedCourseModal,
+    SelectedTopicModal,
   },
+
   data() {
     return {
       configs: {
         grids: {
-          lg: 3,
+          lg: 4,
           xs: 12,
         },
       },
@@ -211,6 +221,7 @@ export default {
       productList: [],
       selectedCourse: {},
       selectedTopic: {},
+      visibleSelectedTopicModal: false,
     }
   },
 
@@ -220,13 +231,15 @@ export default {
       required: false,
     },
   },
+
   mounted() {},
+
   methods: {
     initialSearch() {
       return {
         search: '',
-        selectedCourse: {},
-        topic: {},
+        courseId: '',
+        topicId: '',
         componentName: 'QuestionList',
       }
     },
@@ -236,12 +249,35 @@ export default {
       this.visibleSelectedCourseModal = true
     },
 
-    closeSelectedUserModal() {
+    closeSelectedCourseModal() {
       this.visibleSelectedCourseModal = false
     },
 
     setCourseListCallback(item) {
-      this.selectedCourse = {...item}
+      if (!this.selectedCourse) {
+        this.selectedCourse = JSON.parse(JSON.stringify(item[0]))
+        this.condition_search.courseId = this.selectedCourse.id
+      }
+      if (this.selectedCourse.id !== item[0].id) {
+        this.selectedCourse = JSON.parse(JSON.stringify(item[0]))
+        this.condition_search.courseId = this.selectedCourse.id
+        this.selectedTopic = {}
+        this.condition_search.topicId = ''
+      }
+    },
+
+    openSelectedTopicModal() {
+      this.productList = []
+      this.visibleSelectedTopicModal = true
+    },
+
+    closeSelectedTopicModal() {
+      this.visibleSelectedTopicModal = false
+    },
+
+    setTopicListCallback(item) {
+      this.selectedTopic = JSON.parse(JSON.stringify(item[0]))
+      this.condition_search.topicId = this.selectedTopic.id
     },
   },
 }

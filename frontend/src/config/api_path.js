@@ -8,6 +8,7 @@ export const ADMIN_URIS = {
   ACCOUNT: ADMIN_SCHEMA + '/accounts',
   TRANSMISSION: ADMIN_SCHEMA + '/transmission-logs',
   COURSE: ADMIN_SCHEMA + '/courses',
+  TOPIC: ADMIN_SCHEMA + '/topics',
   QUESTION: ADMIN_SCHEMA + '/questions',
 }
 
